@@ -228,7 +228,7 @@ class WatchFace: public Watchy { //inherit and extend Watchy class
     // Set step to zero at midnight, but store 7 days
     if (currentTime.Hour == 00 && currentTime.Minute == 00) {
       sensor.resetStepCounter();
-      for (int i = 6; i = 1; i--) {
+      for (int i = 6; i >= 1; i--) {
         stored_steps[i] = stored_steps[i - 1];
       }
     }
@@ -247,7 +247,8 @@ class WatchFace: public Watchy { //inherit and extend Watchy class
     display.print(steps);
 
     // Draw Battery
-    batterytext = "Battery:" + String(getBattery()) + "%";
+    //batterytext = "Battery:" + String(getBattery()) + "%";
+    batterytext = "B: " + String(getBattery()) + "%";
     drawRightAligned(batterytext, 200, 180);
 
     // Draw date
