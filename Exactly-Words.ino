@@ -4,6 +4,9 @@
 
 #include "Fonts/Roboto_Medium7pt7b.h" //include any fonts you want to use
 
+
+//RTC_DATA_ATTR bool BLE_CONFIGURED =  false;
+
 class WatchFace: public Watchy { //inherit and extend Watchy class
   public:
 
@@ -61,22 +64,22 @@ class WatchFace: public Watchy { //inherit and extend Watchy class
   String stepsink(String steps, byte leftdigits) {
     // Truncated not rounded
     String stepsink = "";
-    String stepsink_left = "";
     if (steps.length() > 3) {
       stepsink = steps.substring(0, steps.length() - 3);
-      if (leftdigits > 0) {
-        stepsink += ",";
-        stepsink += steps.substring(steps.length() - 3, steps.length() - 3 + leftdigits);
-      }
-    } else {
+      } else {
       stepsink = "0";
       if (leftdigits > 0) {
-        stepsink += ",";
-        stepsink += steps.substring(steps.length() - 3, steps.length() - 3 + leftdigits);
-      }
+        while(steps.length() < 3) {
+          steps = "0" + steps;
+          }
+        }
+    }
+    if (leftdigits > 0) {
+      stepsink += ".";
+      stepsink += steps.substring(steps.length() - 3, steps.length() - 3 + leftdigits);
     }
     return (stepsink);
-  }
+    }
 
   // Used https://github.com/peerdavid/Watchy/blob/master/examples/WatchFaces/David/Watchy_Base.cpp
   uint8_t getBattery() {
@@ -131,12 +134,12 @@ class WatchFace: public Watchy { //inherit and extend Watchy class
     String steps = "";
     String stored_steps[7] = {
       "0",
-      "10000",
-      "11000",
-      "12000",
-      "13000",
-      "14000",
-      "7000"
+      "67",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0"
     };
     String datetext = "";
     String batterytext = "";
@@ -261,10 +264,11 @@ class WatchFace: public Watchy { //inherit and extend Watchy class
 
 WatchFace m; //instantiate your watchface
 
+
 void setup() {
 //  Serial.begin(115200); 
 //  while (!Serial) {
-    ; // wait for serial port to connect. Needed for native USB port only
+//    ; // wait for serial port to connect. Needed for native USB port only
 //  }
   m.init(); //call init in setup
 }
