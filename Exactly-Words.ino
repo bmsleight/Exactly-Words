@@ -169,7 +169,7 @@ class WatchFace: public Watchy { //inherit and extend Watchy class
 
     if (minute_round == 4) minute_words = "almost";
     if (minute_round == 3) minute_words = "coming up to";
-    if (minute_round == 2) minute_words = "after";
+    if (minute_round == 2) minute_words = "a little after";
     if (minute_round == 1) minute_words = "just gone";
 
     // Yes I coudl convert to array loook-up.. but readable....
@@ -216,7 +216,7 @@ class WatchFace: public Watchy { //inherit and extend Watchy class
 //    whole_phase = "Almost twenty-five past five in afternoon";
 //    whole_phase = "Twenty-five past five in afternoon";
 //    whole_phase = "Just gone twenty-five past five in afternoon";
-//    whole_phase = "After twenty-five past five in afternoon";
+//    whole_phase = "A little after twenty-five past five in afternoon";
 //    whole_phase = "Coming up to half past five in afternoon";
     
 
