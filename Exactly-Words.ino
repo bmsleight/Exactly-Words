@@ -6,6 +6,16 @@
 
 
 //RTC_DATA_ATTR bool BLE_CONFIGURED =  false;
+RTC_DATA_ATTR String stored_steps[7] = {
+      "0",
+      "9999",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0"
+    };
+
 
 class WatchFace: public Watchy { //inherit and extend Watchy class
   public:
@@ -132,15 +142,6 @@ class WatchFace: public Watchy { //inherit and extend Watchy class
     byte current_line = 0;
     byte minute_round = currentTime.Minute % 5;
     String steps = "";
-    String stored_steps[7] = {
-      "0",
-      "67",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0"
-    };
     String datetext = "";
     String batterytext = "";
 
