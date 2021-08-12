@@ -6,15 +6,7 @@
 
 
 //RTC_DATA_ATTR bool BLE_CONFIGURED =  false;
-RTC_DATA_ATTR String stored_steps[7] = {
-      "0",
-      "9999",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0"
-    };
+RTC_DATA_ATTR int stored_oldsteps[7] ;
 
 
 class WatchFace: public Watchy { //inherit and extend Watchy class
@@ -231,17 +223,17 @@ class WatchFace: public Watchy { //inherit and extend Watchy class
 
     // Set step to zero at midnight, but store 7 days
     if (currentTime.Hour == 00 && currentTime.Minute == 00) {
-      sensor.resetStepCounter();
       for (int i = 6; i >= 1; i--) {
-        stored_steps[i] = stored_steps[i - 1];
+        stored_oldsteps[i] = stored_oldsteps[i - 1];
       }
+      sensor.resetStepCounter();
     }
 
     //Load steps in k format ie. 12,345 is 12.3
-    stored_steps[0] = sensor.getCounter();
-    steps = "Steps:" + stepsink(stored_steps[0], 1) + " " + stepsink(stored_steps[1], 1) + " ";
+    stored_oldsteps[0] = sensor.getCounter();
+    steps = "Steps:" + stepsink(String(stored_oldsteps[0]), 1) + " " + stepsink(String(stored_oldsteps[1]), 1) + " ";
     for (int i = 2; i <= 6; i++) {
-      steps += stepsink(stored_steps[i], 0) + " ";
+      steps += stepsink(String(stored_oldsteps[i]), 0) + " ";
     }
 
     // Sample steps used for screenshots
@@ -260,6 +252,7 @@ class WatchFace: public Watchy { //inherit and extend Watchy class
     datetext += ", " + String(currentTime.Day) + "/" + monthShortStr(currentTime.Month) + "/" + String(currentTime.Year + 1970 - 2000);
     display.setCursor(0, 180);
     display.print(datetext);
+
   }
 };
 
